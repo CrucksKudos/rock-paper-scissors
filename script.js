@@ -12,4 +12,8 @@ function getComputerChoice() {
     }
 }
 
-console.log(getComputerChoice())
+function getHumanChoice() {
+    let choice = prompt('Rock, Paper or Scissors. What do you choose?');
+    return choice.charAt(0).toUpperCase() + choice.slice(1).toLowerCase();
+}
+
