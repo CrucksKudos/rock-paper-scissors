@@ -1,5 +1,5 @@
 function getComputerChoice() {
-    let n = Math.floor(Math.random() * 3 + 1);
+    const n = Math.floor(Math.random() * 3 + 1);
 
     let choice = "Scissors";
     
@@ -14,59 +14,73 @@ function getComputerChoice() {
 }
 
 function getHumanChoice() {
-    let choice = prompt("Rock, Paper or Scissors. What do you choose?");
+    const choice = prompt("Rock, Paper or Scissors. What do you choose?");
     return choice.charAt(0).toUpperCase() + choice.slice(1).toLowerCase();
 }
 
-function playRound (computerChoice, humanChoice) { 
+function playRound(computerChoice, humanChoice) { 
+
+    let roundWinner = ""
 
     if (humanChoice == "Rock" && computerChoice == "Scissors") {
         humanScore ++;
-        return "You win! Rock beats Scissors.";
+        roundWinner = "You win! Rock beats Scissors.";
     }
 
     else if ((humanChoice == "Rock" && computerChoice == "Paper")) {
         computerScore ++;
-        return "You lose! Paper beats Rock.";   
+        roundWinner = "You lose! Paper beats Rock.";   
     }
 
     else if ((humanChoice == "Paper" && computerChoice == "Rock")) {
         humanScore ++;
-        return "You win! Paper beats Rock.";   
+        roundWinner = "You win! Paper beats Rock.";   
     }
 
     else if ((humanChoice == "Paper" && computerChoice == "Scissors")) {
         computerScore ++;
-        return "You lose! Scissors beats Paper.";   
+        roundWinner = "You lose! Scissors beats Paper.";   
     }  
 
     else if ((humanChoice == "Scissors" && computerChoice == "Paper")) {
         humanScore ++;
-        return "You win! Scissors beats Paper.";   
+        roundWinner = "You win! Scissors beats Paper.";   
     }
     
     else if ((humanChoice == "Scissors" && computerChoice == "Rock")) {
         computerScore ++;
-        return "You lose! Rock beats Scissors.";   
+        roundWinner = "You lose! Rock beats Scissors.";   
     }  
 
     else {
-        return "It's a draw! Nobody scores."
+        computerScore ++;
+        humanScore ++;
+        roundWinner = "It's a draw! Nobody scores.";
     }
+
+    console.log (roundWinner);
 }
 
+function playGame() {
+
+    for (i = 0; i < 5; i++) {
+        playRound(getComputerChoice(), getHumanChoice());
+    }
+
+    if (humanScore > computerScore) {
+        console.log(`You Won! Your score was ${humanScore} points. The computer scored ${computerScore} points.`)
+    }
+
+    else if (humanScore < computerScore) {
+        console.log(`You Lost! Your score was ${humanScore} points. The computer scored ${computerScore} points.`)
+    }
+
+    else {
+        console.log(`It's a draw! Your score was ${humanScore} points.`)
+    }
+}
+  
 let computerScore = 0;
 let humanScore = 0;
 
-let pcChoice = getComputerChoice();
-let humanChoice = getHumanChoice();
-
-console.log(pcChoice)
-
-console.log(humanChoice)
-
-console.log(playRound (pcChoice, humanChoice))
-
-console.log(computerScore)
-
-console.log(humanScore)
+playGame()
