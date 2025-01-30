@@ -1,3 +1,6 @@
+let computerScore = 0;
+let humanScore = 0;
+
 function getComputerChoice() {
     const n = Math.floor(Math.random() * 3 + 1);
 
@@ -53,34 +56,76 @@ function playRound(computerChoice, humanChoice) {
     }  
 
     else {
-        computerScore ++;
-        humanScore ++;
         roundWinner = "It's a draw! Nobody scores.";
     }
 
-    console.log (roundWinner);
+    return roundWinner;
 }
 
-function playGame() {
+const rockButton = document.createElement("button");
+const paperButton = document.createElement("button");
+const scissorsButton = document.createElement("button");
+const results = document.createElement("div");
+const scoreBoard = document.createElement("div");
 
-    for (i = 0; i < 5; i++) {
-        playRound(getComputerChoice(), getHumanChoice());
+
+document.body.appendChild(rockButton);
+document.body.appendChild(paperButton);
+document.body.appendChild(scissorsButton);
+document.body.appendChild(results);
+document.body.appendChild(scoreBoard);
+
+rockButton.textContent = "Rock";
+paperButton.textContent = "Paper";
+scissorsButton.textContent = "Scissors";
+
+rockButton.addEventListener("click", () => {
+    results.textContent = playRound (getComputerChoice(), "Rock")
+    if (humanScore == 5) {
+        scoreBoard.textContent = `You won the game! Your score was: ${humanScore}. The computer score was: ${computerScore}.`;
+        humanScore = 0;
+        computerScore = 0;
     }
-
-    if (humanScore > computerScore) {
-        console.log(`You Won! Your score was ${humanScore} points. The computer scored ${computerScore} points.`)
+    else if (computerScore == 5) {
+        scoreBoard.textContent = `You lost the game! Your score was: ${humanScore}. The computer score was: ${computerScore}.`;
+        humanScore = 0;
+        computerScore = 0;       
     }
-
-    else if (humanScore < computerScore) {
-        console.log(`You Lost! Your score was ${humanScore} points. The computer scored ${computerScore} points.`)
-    }
-
     else {
-        console.log(`It's a draw! Your score was ${humanScore} points.`)
+        scoreBoard.textContent = `Your score now is: ${humanScore}. The computer score is: ${computerScore}.`;
     }
-}
-  
-let computerScore = 0;
-let humanScore = 0;
+})
 
-playGame()
+paperButton.addEventListener("click", () => {
+    results.textContent = playRound (getComputerChoice(), "Paper")
+    if (humanScore == 5) {
+        scoreBoard.textContent = `You won the game! Your score was: ${humanScore}. The computer score was: ${computerScore}.`;
+        humanScore = 0;
+        computerScore = 0;
+    }
+    else if (computerScore == 5) {
+        scoreBoard.textContent = `You lost the game! Your score was: ${humanScore}. The computer score was: ${computerScore}.`;
+        humanScore = 0;
+        computerScore = 0;       
+    }
+    else {
+        scoreBoard.textContent = `Your score now is: ${humanScore}. The computer score is: ${computerScore}.`;
+    }
+})
+
+scissorsButton.addEventListener("click", () => {
+    results.textContent = playRound (getComputerChoice(), "Scissors")
+    if (humanScore == 5) {
+        scoreBoard.textContent = `You won the game! Your score was: ${humanScore}. The computer score was: ${computerScore}.`;
+        humanScore = 0;
+        computerScore = 0;
+    }
+    else if (computerScore == 5) {
+        scoreBoard.textContent = `You lost the game! Your score was: ${humanScore}. The computer score was: ${computerScore}.`;
+        humanScore = 0;
+        computerScore = 0;       
+    }
+    else {
+        scoreBoard.textContent = `Your score now is: ${humanScore}. The computer score is: ${computerScore}.`;
+    }
+})
